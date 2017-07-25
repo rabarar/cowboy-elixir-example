@@ -26,6 +26,15 @@ defmodule CowboyElixirExample do
                                    [{ :env, [{:dispatch, dispatch_config}]}]
                                    )
 
+### SSL EXAMPLE
+    priv_dir = :code.priv_dir(cowboy_elixir_example)
+	  {:ok, _} = :cowboy.start_tls(:https,
+                                  [ {:port, 8443},
+		                                {:cacertfile, priv_dir ++ "/ssl/cowboy-ca.crt"},
+		                                {:certfile, priv_dir ++ "/ssl/server.crt"},
+		                                {:keyfile, priv_dir ++ "/ssl/server.key"}],
+                                  [{:env, [{:dispatch, dispatch_config}]}]
+                                  )
   end
 
   @doc """
